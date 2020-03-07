@@ -4,10 +4,10 @@ import {shouldTriggerBuild} from './utils/github'
 
 async function run(): Promise<void> {
   try {
-    envVariableExists(process.env.github_token, 'github_token')
-    envVariableExists(process.env.bitrise_app_slug, 'bitrise_app_slug')
+    envVariableExists(core.getInput('github_token'), 'github_token')
+    envVariableExists(core.getInput('bitrise_app_slug'), 'bitrise_app_slug')
     envVariableExists(
-      process.env.bitrise_build_trigger_token,
+      core.getInput('bitrise_build_trigger_token'),
       'bitrise_build_trigger_token'
     )
 
