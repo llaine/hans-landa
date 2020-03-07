@@ -1,9 +1,7 @@
 name: Bitrise action
-:w
 
 on: [push]
-jobs: 
-  step_one:
-    - name: Assignee to reviewer
-     uses: pullreminders/assignee-to-reviewer-action@v1.0.4
-
+  jobs:
+    step_one:
+      name: Assignee to reviewer
+      uses: pullreminders/assignee-to-reviewer-action@v1.0.4
