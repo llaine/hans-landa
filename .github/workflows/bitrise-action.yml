@@ -3,11 +3,17 @@ name: The bitrise action
 on: push
 
 jobs:
-  hello_world:
-    name: Hello World 
+  build: # make sure build/ci work properly
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Run a one-line script
-      run: |
-        echo "Hello World"
+    - run: |
+        npm install
+        npm run all
+  test: # make sure the action works on a clean machine without building
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: ./
+      with: 
+        milliseconds: 1000
