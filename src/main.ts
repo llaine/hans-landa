@@ -1,5 +1,5 @@
 import * as core from '@actions/core'
-import {shouldTriggerBuild} from './utils/github'
+import { shouldTriggerBuild } from './utils/github'
 import { triggerBuild } from './utils/bitrise-utils'
 
 // import * as core from '@actions/core'

@@ -1,6 +1,6 @@
 name: The bitrise action
 
-on: push
+on: pull_request
 
 jobs:
   build: # make sure build/ci work properly
@@ -14,7 +14,6 @@ jobs:
         github_token: toto
         bitrise_app_slug: toto
         bitrise_build_trigger_token: toto
-    - uses: mxschmitt/action-tmate@v1.0.2
 
 #  run: # make sure the action works on a clean machine without building
 #    runs-on: ubuntu-latest
