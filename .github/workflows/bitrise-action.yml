@@ -9,7 +9,7 @@ jobs:
     - uses: actions/checkout@v1
     - run: |
         npm install
-    - users: ./
+    - uses: ./
       with:
         github_token: toto
         bitrise_app_slug: toto
