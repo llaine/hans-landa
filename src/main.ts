@@ -1,6 +1,6 @@
 import * as core from '@actions/core'
-import envVariableExists from 'utils/envVariableExists'
-import {shouldTriggerBuild} from 'utils/github'
+import envVariableExists from './utils/envVariableExists'
+import {shouldTriggerBuild} from './utils/github'
 
 async function run(): Promise<void> {
   try {
