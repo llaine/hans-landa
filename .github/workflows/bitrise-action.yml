@@ -1,9 +1,11 @@
-name: Bitrise action
-:w
+name: The bitrise action
 
-on: [push]
-jobs: 
+on: push
+
+jobs:
   step_one:
-    - name: Assignee to reviewer
-     uses: pullreminders/assignee-to-reviewer-action@v1.0.4
-
+    name: Step one 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assignee to reviewer
+        uses: pullreminders/assignee-to-reviewer-action@v1.0.4
