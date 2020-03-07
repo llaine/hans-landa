@@ -1,16 +1,8 @@
 import * as core from '@actions/core'
-import envVariableExists from './utils/envVariableExists'
 import {shouldTriggerBuild} from './utils/github'
 
 async function run(): Promise<void> {
   try {
-    envVariableExists(core.getInput('github_token'), 'github_token')
-    envVariableExists(core.getInput('bitrise_app_slug'), 'bitrise_app_slug')
-    envVariableExists(
-      core.getInput('bitrise_build_trigger_token'),
-      'bitrise_build_trigger_token'
-    )
-
     shouldTriggerBuild()
   } catch (error) {
     core.setFailed(error.message)
