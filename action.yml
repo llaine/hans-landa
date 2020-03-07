@@ -1,10 +1,16 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Bitrise commander'
+description: 'Trigger Bitrise workflow'
+author: 'Hans landa'
 inputs:
-  myInput:              # change this
-    description: 'input description here'
-    default: 'default value if applicable'
+  bitrise_app_slug:
+    description: 'You Bitrise app ID'
+    required: true
+  bitrise_build_trigger_token:
+    description: 'This is your app Build Trigger token'
+    required: true
+  github_token:
+    description: 'Your github access token, ie: secrets.GITHUB_TOKEN'
+    required: true
 runs:
   using: 'node12'
   main: 'dist/index.js'

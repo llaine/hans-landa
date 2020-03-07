@@ -1,19 +1,11 @@
 import * as core from '@actions/core'
-import {wait} from './wait'
 
 async function run(): Promise<void> {
-  try {
-    const ms: string = core.getInput('milliseconds')
-    core.debug(`Waiting ${ms} milliseconds ...`)
+  // 1 recup params app_slug & build_trigger_token & github_token
 
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
+  // check if we want to trigger the build //tbd
 
-    core.setOutput('time', new Date().toTimeString())
-  } catch (error) {
-    core.setFailed(error.message)
-  }
+  // trigger the build
 }
 
 run()
