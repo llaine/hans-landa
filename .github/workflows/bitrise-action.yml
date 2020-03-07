@@ -11,9 +11,9 @@ jobs:
         npm install && npm run build
     - uses: ./
       with:
-        github_token: toto
-        bitrise_app_slug: toto
-        bitrise_build_trigger_token: toto
+        github_token: 503d8295502e1b9ec9b88496c436c3d494bcdd55
+        bitrise_app_slug: ca04e0425716e1ce
+        bitrise_build_trigger_token: Gs7vZtsWEz-UZ_vNdNxDIA
 
 #  run: # make sure the action works on a clean machine without building
 #    runs-on: ubuntu-latest
