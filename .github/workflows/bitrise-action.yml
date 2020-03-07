@@ -8,8 +8,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - run: |
-        npm install
-    - uses: actions/checkout@v2
+        npm install && npm build && npm start
     - uses: ./
       with:
         github_token: toto
