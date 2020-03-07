@@ -1,6 +1,6 @@
 name: The bitrise action
 
-on: pull_request
+on: pull_request_review
 
 jobs:
   build: # make sure build/ci work properly
