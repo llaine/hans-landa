@@ -3,20 +3,23 @@ name: The bitrise action
 on: push
 
 jobs:
-#  build: # make sure build/ci work properly
-#    runs-on: ubuntu-latest
-#    steps:
-#    - uses: actions/checkout@v1
-#    - run: |
-#        npm install
-#        npm run all
-  test: # make sure the action works on a clean machine without building
+  build: # make sure build/ci work properly
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-      - run: npm install
-    - uses: ./
+    - run: |
+        npm install
+    - users: ./
       with:
         github_token: toto
         bitrise_app_slug: toto
         bitrise_build_trigger_token: toto
+#  run: # make sure the action works on a clean machine without building
+#    runs-on: ubuntu-latest
+#    steps:
+#    - uses: actions/checkout@v2
+#    - uses: ./
+#      with:
+#        github_token: toto
+#        bitrise_app_slug: toto
+#        bitrise_build_trigger_token: toto
