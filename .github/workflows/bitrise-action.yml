@@ -1,6 +1,6 @@
 name: The bitrise action
 
-on: push
+on: [pull_request, push]
 
 jobs:
   build: # make sure build/ci work properly
@@ -8,12 +8,19 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - run: |
-        npm install
-        npm run all
-  test: # make sure the action works on a clean machine without building
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
+        npm install && npm run build
     - uses: ./
-      with: 
-        milliseconds: 1000
+      with:
+        github_token: 503d8295502e1b9ec9b88496c436c3d494bcdd55
+        bitrise_app_slug: ca04e0425716e1ce
+        bitrise_build_trigger_token: Gs7vZtsWEz-UZ_vNdNxDIA
+
+#  run: # make sure the action works on a clean machine without building
+#    runs-on: ubuntu-latest
+#    steps:
+#    - uses: actions/checkout@v2
+#    - uses: ./
+#      with:
+#        github_token: toto
+#        bitrise_app_slug: toto
+#        bitrise_build_trigger_token: toto

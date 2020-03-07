@@ -1,7 +1,33 @@
+import * as core from '@actions/core'
+import { triggerBuild } from './utils/bitrise-utils'
+import { context } from '@actions/github'
+
+
 async function run(): Promise<void> {
-  // 1 recup params app_slug & build_trigger_token & github_token
-  // check if we want to trigger the build //tbd
-  // trigger the build
+  try {
+    const bitriseAppSlug = core.getInput('bitrise_app_slug')
+    const bitriseBuildTriggerToken = core.getInput(
+      'bitrise_build_trigger_token',
+    )
+    let branchName = context.ref.slice(11)
+    let commitHash = context.sha
+
+    if (context.payload.pull_request) {
+      branchName = context.payload.pull_request.head.ref
+      commitHash = context.payload.pull_request.sha
+    }
+
+    triggerBuild({
+      bitriseAppSlug,
+      bitriseWorkflow: 'primary',
+      bitriseBuildTriggerToken,
+      branchName,
+      commitHash,
+      pullRequestId: context.payload.pull_request?.number,
+    })
+  } catch (error) {
+    core.setFailed(error.message)
+  }
 }
 
 run()
