@@ -17,6 +17,6 @@ export async function shouldTriggerBuild(): Promise<boolean> {
     pull_number,
   })
 
-  console.log(pr.data)
+  console.log(pr.data.filter(pr => pr.state === ''))
   return true
 }
