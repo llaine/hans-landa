@@ -2,13 +2,13 @@ import * as core from '@actions/core'
 import { triggerBuild } from './utils/bitrise-utils'
 import { context } from '@actions/github'
 
-
 async function run(): Promise<void> {
   try {
     const bitriseAppSlug = core.getInput('bitrise_app_slug')
     const bitriseBuildTriggerToken = core.getInput(
       'bitrise_build_trigger_token',
     )
+    const bitriseWorkflow = core.getInput('bitrise_workflow')
     let branchName = context.ref.slice(11)
     let commitHash = context.sha
 
@@ -19,7 +19,7 @@ async function run(): Promise<void> {
 
     triggerBuild({
       bitriseAppSlug,
-      bitriseWorkflow: 'primary',
+      bitriseWorkflow,
       bitriseBuildTriggerToken,
       branchName,
       commitHash,

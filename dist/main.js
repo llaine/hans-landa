@@ -10,28 +10,33 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const core = require("@actions/core");
-const github_1 = require("./utils/github");
 const bitrise_utils_1 = require("./utils/bitrise-utils");
-// import * as core from '@actions/core'
+const github_1 = require("@actions/github");
 function run() {
+    var _a;
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            github_1.shouldTriggerBuild();
+            const bitriseAppSlug = core.getInput('bitrise_app_slug');
+            const bitriseBuildTriggerToken = core.getInput('bitrise_build_trigger_token');
+            const bitriseWorkflow = core.getInput('bitrise_workflow');
+            let branchName = github_1.context.ref.slice(11);
+            let commitHash = github_1.context.sha;
+            if (github_1.context.payload.pull_request) {
+                branchName = github_1.context.payload.pull_request.head.ref;
+                commitHash = github_1.context.payload.pull_request.sha;
+            }
+            bitrise_utils_1.triggerBuild({
+                bitriseAppSlug,
+                bitriseWorkflow,
+                bitriseBuildTriggerToken,
+                branchName,
+                commitHash,
+                pullRequestId: (_a = github_1.context.payload.pull_request) === null || _a === void 0 ? void 0 : _a.number,
+            });
         }
         catch (error) {
             core.setFailed(error.message);
         }
-        // 1 recup params app_slug & build_trigger_token & github_token
-        // check if we want to trigger the build //tbd
-        // trigger the build
-        bitrise_utils_1.triggerBuild({
-            bitriseAppSlug: 'ca04e0425716e1ce',
-            bitriseWorkflow: 'primary',
-            bitriseBuildTriggerToken: 'Gs7vZtsWEz-UZ_vNdNxDIA',
-            branchName: 'implement-bitrise-utils',
-            commitHash: 'fb96e1ed33612afb5190156fc1ce53922fd2609a',
-            pullRequestId: 10,
-        });
     });
 }
 run();

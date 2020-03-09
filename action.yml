@@ -1,16 +1,19 @@
-name: 'Bitrise money saver'
+name: "Bitrise money saver"
 description: "Don't waste your build time and trigger your Bitrise workflow only when needed."
-author: 'Antoine Hanriat, Louis Lainé'
+author: "Antoine Hanriat, Louis Lainé"
 inputs:
   bitrise_app_slug:
-    description: 'You Bitrise app ID'
+    description: "You Bitrise app ID"
     required: true
   bitrise_build_trigger_token:
-    description: 'This is your app Build Trigger token'
+    description: "This is your app Build Trigger token"
+    required: true
+  bitrise_workflow:
+    description: "The name of the workflow you want to trigger"
     required: true
   github_token:
-    description: 'Your github access token, ie: secrets.GITHUB_TOKEN'
+    description: "Your github access token, ie: secrets.GITHUB_TOKEN"
     required: true
 runs:
-  using: 'node12'
-  main: 'dist/main.js'
+  using: "node12"
+  main: "dist/main.js"
