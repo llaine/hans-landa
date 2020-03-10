@@ -3,15 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "description": "TypeScript template action",
-  "main": "dist/main.js",
+  "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "ncc build --minify ./src/main.ts",
     "format": "prettier --write **/*.ts",
     "format-check": "prettier --check **/*.ts",
     "lint": "eslint src/**/*.ts",
     "pack": "ncc build",
     "test": "jest",
-    "start": "node dist/main.js",
+    "start": "node dist/index.js",
     "all": "npm run build && npm run format && npm run lint && npm run pack && npm test"
   },
   "repository": {
@@ -34,7 +34,7 @@
     "@types/jest": "^24.0.23",
     "@types/node": "^12.7.12",
     "@typescript-eslint/parser": "^2.8.0",
-    "@zeit/ncc": "^0.20.5",
+    "@zeit/ncc": "^0.21.1",
     "babel-plugin-module-resolver": "^4.0.0",
     "eslint": "^5.16.0",
     "eslint-plugin-github": "^2.0.0",
