@@ -5,7 +5,7 @@
  */
 export default function envVariableExists(
   envVariable: Optionnal<string>,
-  envVarName: string
+  envVarName: string,
 ): void {
   if (!envVariable) throw new Error(`${envVarName} is not present`)
 }

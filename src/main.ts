@@ -18,14 +18,15 @@ async function run(): Promise<void> {
       commitHash = context.payload.pull_request.sha
     }
 
-    triggerBuild({
+    const buildProps = {
       bitriseAppSlug,
       bitriseWorkflow,
       bitriseBuildTriggerToken,
       branchName,
       commitHash,
       pullRequestId: context.payload.pull_request?.number,
-    })
+    }
+    triggerBuild(buildProps)
   } catch (error) {
     core.setFailed(error.message)
   }
