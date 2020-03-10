@@ -14,7 +14,7 @@ async function run(): Promise<void> {
 
     if (context.payload.pull_request) {
       branchName = context.payload.pull_request.head.ref
-      commitHash = context.payload.pull_request.sha
+      commitHash = context.payload.pull_request.head.sha
     }
 
     console.log('commitHash:', commitHash)
