@@ -17,6 +17,8 @@ async function run(): Promise<void> {
       commitHash = context.payload.pull_request.sha
     }
 
+    console.log('commitHash:', commitHash)
+
     triggerBuild({
       bitriseAppSlug,
       bitriseWorkflow,
