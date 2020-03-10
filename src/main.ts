@@ -2,6 +2,7 @@ import * as core from '@actions/core'
 import { triggerBuild } from './utils/bitrise-utils'
 import { context } from '@actions/github'
 
+
 async function run(): Promise<void> {
   try {
     const bitriseAppSlug = core.getInput('bitrise_app_slug')
