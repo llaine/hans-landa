@@ -23,6 +23,7 @@ async function run(): Promise<void> {
       bitriseBuildTriggerToken,
       branchName,
       commitHash,
+      commitMessage: context.payload.pull_request?.body,
       pullRequestId: context.payload.pull_request?.number,
       branchDestName: context.payload.pull_request?.base.ref,
     })
