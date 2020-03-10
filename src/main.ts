@@ -18,6 +18,8 @@ async function run(): Promise<void> {
       commitHash = context.payload.pull_request.sha
     }
 
+    console.log(JSON.stringify(context.payload.pull_request, null, 2))
+
     const buildProps = {
       bitriseAppSlug,
       bitriseWorkflow,

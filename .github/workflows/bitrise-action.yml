@@ -1,6 +1,10 @@
 name: The bitrise action
 
-on: [push]
+on:
+  push:
+    branches: [master]
+  pull_request:
+    types: [synchronize, opened, reopened, ready_for_review]
 
 jobs:
   build: # make sure build/ci work properly
