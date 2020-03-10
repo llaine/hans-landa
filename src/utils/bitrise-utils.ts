@@ -7,6 +7,7 @@ export async function triggerBuild({
   branchName,
   commitHash,
   pullRequestId,
+  branchDestName,
 }: {
   bitriseBuildTriggerToken: string
   bitriseAppSlug: string
@@ -14,6 +15,7 @@ export async function triggerBuild({
   branchName: string
   commitHash: string
   pullRequestId?: number
+  branchDestName?: string
 }): Promise<BitriseResponse> {
   console.log(
     `Triggering Bitrise workflow ${bitriseWorkflow} on branch ${branchName} for app slug ${bitriseAppSlug}...`,
@@ -30,6 +32,7 @@ export async function triggerBuild({
         workflow_id: bitriseWorkflow,
         commit_hash: commitHash,
         pull_request_id: pullRequestId,
+        branch_dest: branchDestName,
       } as BitriseBuildParams,
       triggered_by: 'curl',
     },
