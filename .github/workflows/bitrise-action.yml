@@ -1,6 +1,6 @@
 name: The bitrise action
 
-on: push
+on:
   push:
     branches: [master]
   pull_request:
