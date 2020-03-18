@@ -1,9 +1,9 @@
 name: The bitrise action
 
 on:
-  push:
-    branches: [master]
-  pull_request:
+#  push:
+#    branches: [master]
+  pull_request
 #    types: [synchronize, opened, reopened, ready_for_review]
 #  pull_request_review_comment:
 #    types: [created, deleted]
