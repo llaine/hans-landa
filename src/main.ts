@@ -4,9 +4,8 @@ import { context } from '@actions/github'
 
 async function run(): Promise<void> {
   try {
-    console.log('is issue', context.payload.issue)
-    console.log('is pr', context.payload.pull_request)
-    console.log(context.eventName);
+    console.log(context.payload.comment.body)
+    console.log(context.eventName)
     if (context.payload.issue) {
       console.log(context.payload.issue)
     } else {
