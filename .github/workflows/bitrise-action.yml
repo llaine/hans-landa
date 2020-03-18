@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v1
       - uses: ./
         with:
-          github_token: f19b59665cd94c71b54aa9a08b0c4f9c6ae2a7a7
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           bitrise_app_slug: ca04e0425716e1ce
           bitrise_workflow: "primary"
           bitrise_build_trigger_token: Gs7vZtsWEz-UZ_vNdNxDIA
