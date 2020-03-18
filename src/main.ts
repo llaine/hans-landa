@@ -4,9 +4,9 @@ import { context } from '@actions/github'
 
 async function run(): Promise<void> {
   try {
-    console.log('is issue', context.payload.issue)
-    console.log('is pr', context.payload.pull_request)
-    if (context.payload.issue) {
+    console.log(context.payload.comment)
+    console.log(context.payload.pull_request)
+    if (context.payload.comment) {
       console.log(context.payload.issue)
     } else {
       const bitriseAppSlug = core.getInput('bitrise_app_slug')
