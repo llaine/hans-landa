@@ -5,7 +5,7 @@ import { context, GitHub } from '@actions/github'
 async function run(): Promise<void> {
   try {
     if (context.payload.comment && context.payload.issue) {
-      const client = new GitHub('80c71bf1781b979284e1bd52767ac9ab4e740fbd')
+      const client = new GitHub(core.getInput('github_token'))
       const prInformations = context.payload.issue.pull_request.url.split('/')
       const prNumber = prInformations.pop()
       const owner = prInformations[4]
