@@ -6,8 +6,12 @@ async function run(): Promise<void> {
   try {
     console.log(context.payload.comment)
     console.log(context.payload.pull_request)
-    if (context.payload.comment) {
-      console.log(context.payload.issue)
+    if (context.payload.comment && context.payload.issue) {
+      console.log(
+        context.payload.comment.body,
+        ' comment on ',
+        context.payload.issue.pull_request,
+      )
     } else {
       const bitriseAppSlug = core.getInput('bitrise_app_slug')
       const bitriseBuildTriggerToken = core.getInput(
