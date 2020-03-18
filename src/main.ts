@@ -4,6 +4,11 @@ import { context, GitHub } from '@actions/github'
 
 async function run(): Promise<void> {
   try {
+    const bitriseAppSlug = core.getInput('bitrise_app_slug')
+    const bitriseBuildTriggerToken = core.getInput(
+      'bitrise_build_trigger_token',
+    )
+    const bitriseWorkflow = core.getInput('bitrise_workflow')
     if (context.payload.comment && context.payload.issue) {
       const client = new GitHub(core.getInput('github_token'))
       const prInformations = context.payload.issue.pull_request.url.split('/')
@@ -11,18 +16,23 @@ async function run(): Promise<void> {
       const owner = prInformations[4]
       const repo = prInformations[5]
       const pr = await client.pulls.get({ pull_number: prNumber, owner, repo })
-      console.log(pr);
-      console.log(
-        context.payload.comment.body,
-        ' comment on ',
-        context.payload.issue.pull_request,
-      )
+      const branchName = pr.data.head.ref
+      const commitHash = pr.data.head.sha
+      const branchDestName = pr.data.base.ref
+      const comment = context.payload.comment.body
+      if (comment.startsWith('@hans-landa')) {
+        triggerBuild({
+          bitriseAppSlug,
+          bitriseBuildTriggerToken,
+          bitriseWorkflow,
+          branchName,
+          commitHash,
+          commitMessage: '',
+          pullRequestId: prNumber,
+          branchDestName,
+        })
+      }
     } else {
-      const bitriseAppSlug = core.getInput('bitrise_app_slug')
-      const bitriseBuildTriggerToken = core.getInput(
-        'bitrise_build_trigger_token',
-      )
-      const bitriseWorkflow = core.getInput('bitrise_workflow')
       let branchName = context.ref.slice(11)
       let commitHash = context.sha
 
