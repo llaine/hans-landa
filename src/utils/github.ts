@@ -54,6 +54,6 @@ export function shouldTriggerMessageBuild(trigger: TriggerType): boolean {
 export function parseComment(
   comment: string,
 ): { command: string; workflow: string } {
-  const [command, workflow] = comment.split(' ')
+  const [command, workflow] = comment.trim().split(' ')
   return { command, workflow }
 }
