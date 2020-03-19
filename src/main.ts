@@ -10,6 +10,9 @@ import {
   parseComment,
 } from './utils/github'
 
+/**
+ * Token to trigger the command line
+ */
 const COMMAND_TRIGGER = '@hans-landa'
 
 async function run(): Promise<void> {
@@ -54,10 +57,18 @@ async function buildOnComment(props: ActionProps): Promise<void> {
 
   const client = new GitHub(props.githubToken)
 
-  const prInformation = context.payload.pull_request?.url.split('/')
-  const prNumber = parseInt(`${prInformation.pop()}`, 10)
-  const owner = prInformation[4]
-  const repo = prInformation[5]
+  const prNumber = context.payload.issue?.number
+  const repo = context.payload.repository?.name
+  const owner = context.payload.repository?.owner.login
+  console.log({
+    prNumber,
+    repo,
+    owner,
+  })
+  if (!prNumber || !repo || !owner) {
+    console.log('Unable to find PR number')
+    return
+  }
   const pr = await client.pulls.get({ pull_number: prNumber, owner, repo })
   const branchName = pr.data.head.ref
   const commitHash = pr.data.head.sha
