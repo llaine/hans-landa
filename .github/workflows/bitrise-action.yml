@@ -21,6 +21,7 @@ jobs:
           bitrise_app_slug: ca04e0425716e1ce
           bitrise_build_trigger_token: Gs7vZtsWEz-UZ_vNdNxDIA
           trigger_on: all
+          command_alias: primaryAndTertiary
       - uses: ./
         name: Secondary default (all)
         with:
@@ -36,3 +37,4 @@ jobs:
           bitrise_app_slug: ca04e0425716e1ce
           bitrise_build_trigger_token: Gs7vZtsWEz-UZ_vNdNxDIA
           trigger_on: command
+          command_alias: primaryAndTertiary
