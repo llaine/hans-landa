@@ -14,6 +14,13 @@ inputs:
   github_token:
     description: "Your github access token, ie: secrets.GITHUB_TOKEN"
     required: true
+  trigger_on:
+    description: "Optional params to select which trigger to use. Can be 'all' | 'command' -- default is 'all'"
+    required: false
 runs:
   using: "node12"
   main: "dist/index.js"
+
+branding:
+  icon: "gift"
+  color: "purple"

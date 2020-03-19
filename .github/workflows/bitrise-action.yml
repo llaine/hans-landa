@@ -14,8 +14,25 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - uses: ./
+        name: Primary all
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          bitrise_workflow: primary
           bitrise_app_slug: ca04e0425716e1ce
-          bitrise_workflow: "primary"
           bitrise_build_trigger_token: Gs7vZtsWEz-UZ_vNdNxDIA
+          trigger_on: all
+      - uses: ./
+        name: Secondary default (all)
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          bitrise_workflow: secondary
+          bitrise_app_slug: ca04e0425716e1ce
+          bitrise_build_trigger_token: Gs7vZtsWEz-UZ_vNdNxDIA
+      - uses: ./
+        name: Tertiary command only
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          bitrise_workflow: tertiary
+          bitrise_app_slug: ca04e0425716e1ce
+          bitrise_build_trigger_token: Gs7vZtsWEz-UZ_vNdNxDIA
+          trigger_on: command
