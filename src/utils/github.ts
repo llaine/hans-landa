@@ -36,12 +36,6 @@ export function getActionProps(): ActionProps {
 }
 
 export function isCommentOnPr(context: Context): boolean {
-  console.log(`!!context.payload.comment: ${!!context.payload.comment}`)
-  console.log(
-    `!!context.payload.issue?.pull_request: ${!!context.payload.issue
-      ?.pull_request}`,
-  )
-  console.log(`context.payload.action === 'created': ${context.payload.action}`)
   return (
     !!context.payload.comment &&
     !!context.payload.issue?.pull_request &&

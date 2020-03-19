@@ -66,7 +66,11 @@ async function buildOnComment(props: ActionProps): Promise<void> {
     owner,
   })
   if (!prNumber || !repo || !owner) {
-    console.log('Unable to find PR number')
+    console.log('Unable to find PR info', {
+      prNumber,
+      repo,
+      owner,
+    })
     return
   }
   const pr = await client.pulls.get({ pull_number: prNumber, owner, repo })
@@ -74,6 +78,10 @@ async function buildOnComment(props: ActionProps): Promise<void> {
   const commitHash = pr.data.head.sha
   const branchDestName = pr.data.base.ref
   const { command, workflow } = parseComment(context.payload.comment.body)
+  console.log({
+    command,
+    workflow,
+  })
   if (
     command === COMMAND_TRIGGER &&
     (workflow === props.bitriseWorkflow || workflow === props.commandAlias)
