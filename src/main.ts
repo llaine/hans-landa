@@ -81,7 +81,16 @@ async function buildOnComment(props: ActionProps): Promise<void> {
   console.log({
     command,
     workflow,
+    COMMAND_TRIGGER,
   })
+  console.log(`command === COMMAND_TRIGGER: ${command === COMMAND_TRIGGER}`)
+  console.log(
+    `workflow === props.bitriseWorkflow : ${workflow ===
+      props.bitriseWorkflow}`,
+  )
+  console.log(
+    `workflow === props.commandAlias : ${workflow === props.commandAlias}`,
+  )
   if (
     command === COMMAND_TRIGGER &&
     (workflow === props.bitriseWorkflow || workflow === props.commandAlias)
