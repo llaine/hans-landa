@@ -1,22 +1,57 @@
-import { context, GitHub } from '@actions/github'
+import { getInput } from '@actions/core'
+import { Context } from '@actions/github/lib/context'
 
 export async function shouldTriggerBuild(): Promise<boolean> {
-  const octokit = new GitHub('503d8295502e1b9ec9b88496c436c3d494bcdd55')
-  const {
-    repo: { owner, repo },
-    payload,
-  } = context
-
-  if (!payload.pull_request) return true
-
-  const pull_number = payload.pull_request.number
-
-  const pr = await octokit.pulls.listReviews({
-    owner,
-    repo,
-    pull_number,
-  })
-
-  console.log(pr.data.filter(pr => pr.state === ''))
+  // TODO
   return true
+}
+
+type TriggerType = 'all' | 'command'
+export interface ActionProps {
+  bitriseAppSlug: string
+  bitriseBuildTriggerToken: string
+  bitriseWorkflow: string
+  githubToken: string
+  triggerOn: TriggerType
+}
+
+/**
+ * Validate and return the props given to the action.
+ * See action.yml
+ */
+export function getActionProps(): ActionProps {
+  const triggerOn = (getInput('trigger_on', { required: false }) ||
+    'all') as TriggerType
+  return {
+    triggerOn,
+    bitriseAppSlug: getInput('bitrise_app_slug', { required: true }),
+    bitriseBuildTriggerToken: getInput('bitrise_build_trigger_token', {
+      required: true,
+    }),
+    bitriseWorkflow: getInput('bitrise_workflow', { required: true }),
+    githubToken: getInput('github_token', { required: true }),
+  }
+}
+
+export function isCommentOnPr(context: Context): boolean {
+  return (
+    !!context.payload.comment &&
+    !!context.payload.issue &&
+    !!context.payload.pull_request
+  )
+}
+
+export function shouldTriggerCommitBuild(trigger: TriggerType): boolean {
+  return trigger === 'all'
+}
+
+export function shouldTriggerMessageBuild(trigger: TriggerType): boolean {
+  return trigger === 'all' || trigger === 'command'
+}
+
+export function parseComment(
+  comment: string,
+): { command: string; workflow: string } {
+  const [command, workflow] = comment.split(' ')
+  return { command, workflow }
 }
