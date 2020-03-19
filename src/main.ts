@@ -12,6 +12,7 @@ import {
 
 /**
  * Token to trigger the command line
+ * Note: let's find a better name
  */
 const COMMAND_TRIGGER = '@hans-landa'
 
