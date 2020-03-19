@@ -13,6 +13,7 @@ export interface ActionProps {
   bitriseWorkflow: string
   githubToken: string
   triggerOn: TriggerType
+  commandAlias?: string
 }
 
 /**
@@ -30,6 +31,7 @@ export function getActionProps(): ActionProps {
     }),
     bitriseWorkflow: getInput('bitrise_workflow', { required: true }),
     githubToken: getInput('github_token', { required: true }),
+    commandAlias: getInput('command_alias', { required: false }),
   }
 }
 

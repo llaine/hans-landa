@@ -10,7 +10,7 @@ import {
   parseComment,
 } from './utils/github'
 
-const COMMAND_TRIGGER = '@Hans-landa'
+const COMMAND_TRIGGER = '@hans-landa'
 
 async function run(): Promise<void> {
   try {
@@ -30,10 +30,14 @@ async function buildOnCommit(props: ActionProps): Promise<void> {
   let commitHash = context.sha
 
   if (context.payload.pull_request) {
+    console.log('>>Triggered by commit on PR')
     branchName = context.payload.pull_request.head.ref
     commitHash = context.payload.pull_request.head.sha
+  } else {
+    console.log('>>Triggered by commit')
   }
 
+  console.log(JSON.stringify(context.payload, null, 2))
   triggerBuild({
     ...props,
     branchName,
@@ -45,8 +49,10 @@ async function buildOnCommit(props: ActionProps): Promise<void> {
 }
 
 async function buildOnComment(props: ActionProps): Promise<void> {
-  const client = new GitHub(props.githubToken)
+  console.log('>>Triggered by comment on PR')
   console.log(JSON.stringify(context.payload, null, 2))
+
+  const client = new GitHub(props.githubToken)
 
   const prInformation = context.payload.pull_request?.url.split('/')
   const prNumber = parseInt(`${prInformation.pop()}`, 10)
@@ -57,7 +63,10 @@ async function buildOnComment(props: ActionProps): Promise<void> {
   const commitHash = pr.data.head.sha
   const branchDestName = pr.data.base.ref
   const { command, workflow } = parseComment(context.payload.comment.body)
-  if (command === COMMAND_TRIGGER && workflow === props.bitriseWorkflow) {
+  if (
+    command === COMMAND_TRIGGER &&
+    (workflow === props.bitriseWorkflow || workflow === props.commandAlias)
+  ) {
     triggerBuild({
       ...props,
       branchName,

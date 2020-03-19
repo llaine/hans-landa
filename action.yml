@@ -17,6 +17,9 @@ inputs:
   trigger_on:
     description: "Optional params to select which trigger to use. Can be 'all' | 'command' -- default is 'all'"
     required: false
+  command_alias:
+    description: "Alias to use instead of the workflow name when using the command"
+    required: false
 runs:
   using: "node12"
   main: "dist/index.js"
