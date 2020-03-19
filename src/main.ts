@@ -18,6 +18,7 @@ const COMMAND_TRIGGER = '@hans-landa'
 async function run(): Promise<void> {
   try {
     const props = getActionProps()
+    console.log(props)
     if (isCommentOnPr(context) && shouldTriggerMessageBuild(props.triggerOn)) {
       await buildOnComment(props)
     } else if (shouldTriggerCommitBuild(props.triggerOn)) {
